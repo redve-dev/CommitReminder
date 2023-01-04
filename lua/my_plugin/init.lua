@@ -4,9 +4,6 @@ local function is_git()
 end
 
 local function count_diff()
-	if not is_git() then
-		return ""
-	end
 	local diff = vim.fn.system({"git", "diff", "--numstat"})
 	--https://stackoverflow.com/questions/1426954/split-string-in-lua
 	-- fr, lua has tons of string methods, but not a split??
@@ -21,11 +18,32 @@ local function count_diff()
 		return t
 	end
 	local lines = split_string(diff, "	")
-	local added = tonumber(lines[1])
-	local removed = tonumber(lines[2])
-	return {added= added, removed=removed}
+	return {added=tonumber(lines[1]), removed=tonumber(lines[2])}
+end
+
+local function sleep(n)
+	local clock = os.clock
+	local t0 = clock()
+	while clock() - t0 <= n do end
+end
+
+local function notify_user()
+	local diff = count_diff()
+	local communicate = [[
+Remember, to commit your changes
+You have +%d -%d lines
+]]
+	communicate = string.format(communicate, diff.added, diff.removed)
+	print(communicate)
+end
+
+local function cycle()
+	if is_git() then
+		notify_user()
+		sleep(5)
+	end
 end
 
 return {
-	count_diff = count_diff,
+	cycle = cycle
 }
