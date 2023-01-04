@@ -32,8 +32,9 @@ You have +%d -%d lines
 end
 
 local previous_cycle_time = 0
+local delay <const> = 5
 local function cycle()
-	if is_git() and os.time() - previous_cycle_time > 5 then
+	if is_git() and os.time() - previous_cycle_time > delay then
 		notify_user()
 		previous_cycle_time = os.time()
 	end
