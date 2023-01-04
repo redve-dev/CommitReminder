@@ -21,12 +21,6 @@ local function count_diff()
 	return {added=tonumber(lines[1]), removed=tonumber(lines[2])}
 end
 
-local function sleep(n)
-	local clock = os.clock
-	local t0 = clock()
-	while clock() - t0 <= n do end
-end
-
 local function notify_user()
 	local diff = count_diff()
 	local communicate = [[
@@ -37,10 +31,11 @@ You have +%d -%d lines
 	print(communicate)
 end
 
+local last_called = 0
 local function cycle()
-	if is_git() then
+	if is_git() and os.time() - last_called > 5 then
 		notify_user()
-		sleep(5)
+		last_called = os.time()
 	end
 end
 
