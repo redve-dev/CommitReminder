@@ -3,14 +3,6 @@ local function is_git()
 	return t ~= "fatal"
 end
 
-local function print_git()
-	local message = "I am not in a git repo"
-	if is_git() then
-		message = "I am in a git repo"
-	end
-	print(message)
-end
-
 local function count_diff()
 	local diff = vim.fn.system({"git", "diff", "--numstat"})
 	--https://stackoverflow.com/questions/1426954/split-string-in-lua
@@ -33,6 +25,5 @@ local function count_diff()
 end
 
 return {
-	print_git = print_git,
 	count_diff = count_diff,
 }
