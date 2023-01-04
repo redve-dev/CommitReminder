@@ -1,7 +1,6 @@
 local function is_git()
-	local t = vim.fn.systemlist({"git", "status"})[1]
-	local first_word = t:gmatch("%w+")()
-	return first_word ~= "fatal"
+	local t = vim.fn.system({"git", "status"}):sub(1, 5)
+	return t ~= "fatal"
 end
 
 local function print_git()
