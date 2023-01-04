@@ -50,8 +50,8 @@ local function setup(args)
 		delay = args.delay
 	end
 
-	if args.changes then
-		required_changes_to_notify = args.changes
+	if args.required_changes then
+		required_changes_to_notify = args.required_changes
 	end
 	vim.cmd("augroup my_plugin")
 	vim.cmd("autocmd!")
