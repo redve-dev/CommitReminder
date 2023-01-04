@@ -31,11 +31,11 @@ You have +%d -%d lines
 	print(communicate)
 end
 
-local last_called = 0
+local previous_cycle_time = 0
 local function cycle()
-	if is_git() and os.time() - last_called > 5 then
+	if is_git() and os.time() - previous_cycle_time > 5 then
 		notify_user()
-		last_called = os.time()
+		previous_cycle_time = os.time()
 	end
 end
 
