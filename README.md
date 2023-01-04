@@ -1,4 +1,22 @@
-# Neovim git remainder
+# CommitReminder
+This plugin will remind you to commit your changes, after chosen amount of changed lines.
+# Dependencies
+The plugin requires [nvim-notify](https://github.com/rcarriga/nvim-notify)
 
-This plugin reminds you every few changed lines of code, to commit them.<br>
-Remember to commit your changes as often as you can.
+# Installation
+[**packer.nvim**](https://github.com/wbthomason/packer.nvim)
+```lua
+use({"redve-dev/neovim-git-reminder", config = function()
+	require("my_plugin").setup({})
+end})
+```
+
+# Configuration
+```lua
+use({"redve-dev/neovim-git-reminder", config = function()
+	require("my_plugin").setup({
+			delay=5,
+			required_changes=20
+		})
+end})
+```
