@@ -1,3 +1,9 @@
+local is_on = true
+
+local function Toggle()
+	is_on = not is_on
+end
+
 local function is_git()
 	local t = vim.fn.system({"git", "status"}):sub(1, 5)
 	return t ~= "fatal"
@@ -17,8 +23,8 @@ local function count_diff()
 		end
 		return t
 	end
-	local lines = split_string(diff, "	")
-	return {added=tonumber(lines[1]), removed=tonumber(lines[2])}
+	local changed_lines = split_string(diff, "	")
+	return {added=tonumber(changed_lines[1]), removed=tonumber(changed_lines[2])}
 end
 
 
@@ -33,7 +39,13 @@ local function notify_user()
 end
 
 local function cycle()
-	if not is_git() or os.time() - previous_cycle_time <= delay then
+	if not is_on then
+		return
+	end
+	if not is_git()then
+		return
+	end
+	if os.time() - previous_cycle_time <= delay then
 		return
 	end
 	previous_cycle_time = os.time()
@@ -55,7 +67,7 @@ local function setup(args)
 	end
 	vim.cmd("augroup my_plugin")
 	vim.cmd("autocmd!")
-	vim.cmd("autocmd TextChanged * lua require('my_plugin').cycle()")
+	vim.cmd("autocmd TextChanged  * lua require('my_plugin').cycle()")
 	vim.cmd("autocmd TextChangedI * lua require('my_plugin').cycle()")
 	vim.cmd("autocmd TextChangedP * lua require('my_plugin').cycle()")
 	vim.cmd("autocmd TextChangedT * lua require('my_plugin').cycle()")
@@ -65,4 +77,5 @@ end
 return {
 	cycle = cycle,
 	setup = setup,
+	Toggle = Toggle,
 }
