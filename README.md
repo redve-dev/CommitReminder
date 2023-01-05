@@ -25,11 +25,10 @@ use({"redve-dev/neovim-git-reminder", config = function()
 		})
 end})
 ```
-delay - delay in seconds between next warning will appear.<br>
-required_changes - how many lines of code must change, before you will get warnings.<br>
+delay - delay in seconds before next warning appears.<br>
+required_changes - how many lines of code can change before the warnings appear.<br>
 <br>
-If you want the plugin to stay quiet, run:
+If you want toggle the plugin off and on, run:
 ```
 !lua require("CommitReminder").Toggle()
 ```
-Run this command again, if you want the plugin to start warning you again.<br>
