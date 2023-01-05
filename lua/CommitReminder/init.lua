@@ -51,6 +51,9 @@ local function cycle()
 	previous_cycle_time = os.time()
 
 	local changes = count_diff()
+	if changes.added == nil or changes.removed == nil then
+		return
+	end
 	local changes_sum = changes.added + changes.removed
 	if changes_sum > required_changes_to_notify then
 		notify_user()
