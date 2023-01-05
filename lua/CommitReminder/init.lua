@@ -58,19 +58,21 @@ local function cycle()
 end
 
 local function setup(args)
-	if args.delay then
-		delay = args.delay
-	end
+	if args then
+		if args.delay then
+			delay = args.delay
+		end
 
-	if args.required_changes then
-		required_changes_to_notify = args.required_changes
+		if args.required_changes then
+			required_changes_to_notify = args.required_changes
+		end
 	end
 	vim.cmd("augroup my_plugin")
 	vim.cmd("autocmd!")
-	vim.cmd("autocmd TextChanged  * lua require('my_plugin').cycle()")
-	vim.cmd("autocmd TextChangedI * lua require('my_plugin').cycle()")
-	vim.cmd("autocmd TextChangedP * lua require('my_plugin').cycle()")
-	vim.cmd("autocmd TextChangedT * lua require('my_plugin').cycle()")
+	vim.cmd("autocmd TextChanged  * lua require('CommitReminder').cycle()")
+	vim.cmd("autocmd TextChangedI * lua require('CommitReminder').cycle()")
+	vim.cmd("autocmd TextChangedP * lua require('CommitReminder').cycle()")
+	vim.cmd("autocmd TextChangedT * lua require('CommitReminder').cycle()")
 	vim.cmd("augroup end")
 end
 
