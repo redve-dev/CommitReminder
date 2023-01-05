@@ -32,4 +32,4 @@ If you want the plugin to stay quiet, run:
 ```
 !lua require("CommitReminder").Toggle()
 ```
-Run this command again, if you want the plugin to start warning you.<br>
+Run this command again, if you want the plugin to start warning you again.<br>
