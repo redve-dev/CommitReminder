@@ -23,7 +23,9 @@ end})
 delay - delay in seconds between next warning will appear.<br>
 required_changes - how many lines of code must change, before you will get warnings.<br>
 <br>
-If you want the plugin to stay quiet, run
+If you want the plugin to stay quiet, run:
 ```
 !lua require("CommitReminder").Toggle()
 ```
+Run this command again, if you want the plugin to start warning you.<br>
+[If you see this text, i failed embedding a video. Click me](https://i.imgur.com/Xsw1cjA.mp4)
