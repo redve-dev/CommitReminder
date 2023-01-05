@@ -1,5 +1,10 @@
 # CommitReminder
-This plugin will remind you to commit your changes, after chosen amount of changed lines.
+This plugin will remind you to commit your changes more often.<br>
+
+
+https://user-images.githubusercontent.com/106469071/210678434-6e15c60a-62c3-4129-93ea-27168d438494.mp4
+
+
 # Dependencies
 The plugin requires [nvim-notify](https://github.com/rcarriga/nvim-notify)
 
@@ -28,4 +33,3 @@ If you want the plugin to stay quiet, run:
 !lua require("CommitReminder").Toggle()
 ```
 Run this command again, if you want the plugin to start warning you.<br>
-[If you see this text, i failed embedding a video. Click me](https://i.imgur.com/Xsw1cjA.mp4)
