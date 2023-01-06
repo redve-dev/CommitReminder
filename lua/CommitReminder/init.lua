@@ -65,9 +65,12 @@ local function setup(args)
 		if args.delay then
 			delay = args.delay
 		end
-
 		if args.required_changes then
 			required_changes_to_notify = args.required_changes
+		end
+		if args.remind_on_save_only then
+			vim.cmd("autocmd BufWrite * lua require('CommitReminder').cycle()")
+			return
 		end
 	end
 	vim.cmd("augroup my_plugin")
