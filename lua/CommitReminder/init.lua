@@ -23,8 +23,14 @@ local function count_diff()
 		end
 		return t
 	end
-	local changed_lines = split_string(diff, "	")
-	return {added=tonumber(changed_lines[1]), removed=tonumber(changed_lines[2])}
+	local changed_lines = split_string(diff, "	|\n")
+	local added = 0
+	local removed = 0
+	for i=1,table.getn(changed_lines),3 do
+		added = added + tonumber(changed_lines[i])
+		removed = removed + tonumber(changed_lines[i + 1])
+	end
+	return {added=added, removed=removed}
 end
 
 
@@ -69,7 +75,7 @@ local function setup(args)
 			required_changes_to_notify = args.required_changes
 		end
 		if args.remind_on_save_only then
-			vim.cmd("autocmd BufWrite * lua require('CommitReminder').cycle()")
+			vim.cmd("autocmd BufWritePost * lua require('CommitReminder').cycle()")
 			return
 		end
 	end
