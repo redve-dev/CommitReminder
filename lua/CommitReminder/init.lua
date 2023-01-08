@@ -27,8 +27,10 @@ local function count_diff()
 	local added = 0
 	local removed = 0
 	for i=1,table.getn(changed_lines),3 do
-		added = added + tonumber(changed_lines[i])
-		removed = removed + tonumber(changed_lines[i + 1])
+		if changed_lines[i] ~= "-" then
+			added = added + tonumber(changed_lines[i])
+			removed = removed + tonumber(changed_lines[i + 1])
+		end
 	end
 	return {added=added, removed=removed}
 end
